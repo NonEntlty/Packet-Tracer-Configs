@@ -132,3 +132,4 @@ line vty 0 4
 !
 !
 end
+//////////////////////crypto key generate rsa general-keys modulus 2048////////////
