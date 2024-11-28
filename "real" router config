@@ -1,0 +1,95 @@
+Building configuration...
+
+Current configuration : 1238 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R2
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username real privilege 15 secret 5 $1$mERr$w7h4hYvHPpMBUUYx1pEC01
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524T0BI-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name domain.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 172.168.4.251 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.168.3.251 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 159.168.1.252 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 192.168.2.0 255.255.255.0 172.168.3.252 
+ip route 192.168.1.0 255.255.255.0 172.168.4.252 
+ip route 172.168.2.0 255.255.255.0 172.168.4.252 
+ip route 172.168.2.0 255.255.255.0 172.168.3.252 
+!
+ip flow-export version 9
+!
+!
+access-list 100 deny tcp 192.168.1.0 0.0.0.255 any eq 22
+access-list 100 deny tcp 192.168.2.0 0.0.0.255 any eq 22
+access-list 100 permit ip any any
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class 100 in
+ login local
+ transport input ssh
+!
+!
+!
+end
